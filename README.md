@@ -39,10 +39,14 @@ the app creates one with the defaults on first launch:
 Edit that file and restart the app to change the target site or timeout,
 no rebuild or new release needed.
 
-## Manual reset shortcut
+## Keyboard shortcuts
 
-Press `Ctrl+Alt+Backspace` at any time to jump straight to the homepage,
-no need to wait for the idle timeout.
+- `Ctrl+Alt+Backspace` — jump straight to the homepage, no need to wait for
+  the idle timeout.
+- `Ctrl+Alt+I` — open a small settings popup to change the idle timeout
+  (in seconds) without editing `config.json` by hand. The homepage URL is
+  not editable here on purpose, it stays fixed. Saved instantly, applies
+  right away, no restart needed.
 
 ## Build a Windows executable
 

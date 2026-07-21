@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Kiosk Settings</title>
+<style>
+  body {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    padding: 20px;
+    margin: 0;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+  button {
+    margin-top: 14px;
+    padding: 6px 18px;
+    font-size: 14px;
+  }
+  .hint {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+  <label for="idle">Idle timeout (seconds)</label>
+  <input id="idle" type="number" min="1" step="1" />
+  <div class="hint">Homepage URL is fixed and not editable here.</div>
+  <button id="save">Save</button>
+
+  <script>
+    const { ipcRenderer } = require("electron");
+    const input = document.getElementById("idle");
+
+    ipcRenderer.invoke("get-idle-seconds").then((value) => {
+      input.value = value;
+      input.focus();
+      input.select();
+    });
+
+    function save() {
+      const value = parseInt(input.value, 10);
+      if (Number.isFinite(value) && value > 0) {
+        ipcRenderer.send("set-idle-seconds", value);
+      }
+    }
+
+    document.getElementById("save").addEventListener("click", save);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") save();
+    });
+  </script>
+</body>
+</html>
