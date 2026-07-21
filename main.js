@@ -11,7 +11,12 @@ const HOME_SHORTCUT = "Control+Alt+Backspace";
 const SETTINGS_SHORTCUT = "Control+Alt+I";
 
 function configPath() {
-  const dir = app.isPackaged ? path.dirname(process.execPath) : __dirname;
+  // electron-builder's portable target extracts the app into a temp folder
+  // at runtime, so process.execPath doesn't point at the real exe location.
+  // PORTABLE_EXECUTABLE_DIR is the env var it sets for the actual folder.
+  const dir = app.isPackaged
+    ? process.env.PORTABLE_EXECUTABLE_DIR || path.dirname(process.execPath)
+    : __dirname;
   return path.join(dir, "config.json");
 }
 
