@@ -25,7 +25,19 @@ Press `Cmd+Q` to quit.
 
 ## Config
 
-Edit `HOME_URL` and `IDLE_SECONDS` at the top of `main.js`.
+The URL and idle timeout are read from a `config.json` file placed next to
+the exe (or next to `main.js` when running `npm start`). If it's missing,
+the app creates one with the defaults on first launch:
+
+```json
+{
+  "homeUrl": "https://gix.uw.edu/b92home",
+  "idleSeconds": 300
+}
+```
+
+Edit that file and restart the app to change the target site or timeout,
+no rebuild or new release needed.
 
 ## Build a Windows executable
 
