@@ -1,7 +1,7 @@
 const { app, BrowserWindow, powerMonitor } = require("electron");
 
 const HOME_URL = "https://gix.uw.edu";
-const IDLE_SECONDS = 20;
+const IDLE_SECONDS = 300; // 5 minutes
 const POLL_MS = 1000;
 
 let win;
