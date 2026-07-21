@@ -26,3 +26,20 @@ Press `Cmd+Q` to quit.
 ## Config
 
 Edit `HOME_URL` and `IDLE_SECONDS` at the top of `main.js`.
+
+## Build a Windows executable
+
+```bash
+npm run dist:win
+```
+
+Produces a portable, double-clickable `dist/GIX Kiosk 1.0.0.exe` (no
+installer needed). Rebuild and re-copy this file after every code change,
+`npm start` runs the live source but the exe is a frozen snapshot from
+whenever it was last built.
+
+To use a custom icon, drop a `.ico` file at `build/icon.ico`, add
+`"icon": "build/icon.ico"` under `build.win` in `package.json`, then rebuild.
+
+The exe is unsigned, so Windows SmartScreen will show an "unknown publisher"
+warning on first run (click "More info" then "Run anyway").
