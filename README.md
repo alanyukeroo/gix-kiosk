@@ -39,6 +39,11 @@ the app creates one with the defaults on first launch:
 Edit that file and restart the app to change the target site or timeout,
 no rebuild or new release needed.
 
+## Manual reset shortcut
+
+Press `Ctrl+Alt+Backspace` at any time to jump straight to the homepage,
+no need to wait for the idle timeout.
+
 ## Build a Windows executable
 
 ```bash

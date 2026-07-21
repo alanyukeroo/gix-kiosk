@@ -1,4 +1,4 @@
-const { app, BrowserWindow, powerMonitor } = require("electron");
+const { app, BrowserWindow, powerMonitor, globalShortcut } = require("electron");
 const fs = require("fs");
 const path = require("path");
 
@@ -7,6 +7,7 @@ const DEFAULTS = {
   idleSeconds: 300,
 };
 const POLL_MS = 1000;
+const HOME_SHORTCUT = "Control+Alt+Backspace";
 
 function configPath() {
   const dir = app.isPackaged ? path.dirname(process.execPath) : __dirname;
@@ -51,9 +52,17 @@ function createWindow() {
       win.loadURL(homeUrl);
     }
   }, POLL_MS);
+
+  globalShortcut.register(HOME_SHORTCUT, () => {
+    win.loadURL(homeUrl);
+  });
 }
 
 app.whenReady().then(createWindow);
+
+app.on("will-quit", () => {
+  globalShortcut.unregisterAll();
+});
 
 app.on("window-all-closed", () => {
   app.quit();
